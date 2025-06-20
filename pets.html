@@ -23,6 +23,13 @@
 
     <main class="pets-container">
         <h1>Available Pets</h1>
+        <div class="filter-buttons" style="margin: 40px 0; text-align: center;">
+            <button onclick="filterPets('all')" class="filter-btn" style="margin: 0 5px; padding: 6px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; height: 32px;">All Pets</button>
+            <button onclick="filterPets('dog')" class="filter-btn" style="margin: 0 5px; padding: 6px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; height: 32px;">Dogs</button>
+            <button onclick="filterPets('cat')" class="filter-btn" style="margin: 0 5px; padding: 6px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; height: 32px;">Cats</button>
+            <button onclick="filterPets('capybara')" class="filter-btn" style="margin: 0 5px; padding: 6px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; height: 32px;">Capybaras</button>
+            <button onclick="filterPets('bird')" class="filter-btn" style="margin: 0 5px; padding: 6px 12px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; height: 32px;">Birds</button>
+        </div>
         <div class="pet-grid">
             <div class="pet-card">
                 <img src="images/dog01.jpg" alt="Dog">
@@ -117,5 +124,35 @@
     </footer>
 
     <script src="script.js"></script>
+    <script>
+        function filterPets(type) {
+            const petCards = document.querySelectorAll('.pet-card');
+            petCards.forEach(card => {
+                const img = card.querySelector('img');
+                const imgSrc = img.src.toLowerCase();
+                
+                if (type === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    if (imgSrc.includes(type)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+
+            // Update active button style
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                if (btn.textContent.toLowerCase().includes(type) ||
+                    (type === 'all' && btn.textContent === 'All Pets')) {
+                    btn.style.backgroundColor = '#45a049';
+                } else {
+                    btn.style.backgroundColor = '#4CAF50';
+                }
+            });
+        }
+    </script>
 </body>
 </html>
